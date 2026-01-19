@@ -1091,3 +1091,83 @@ h1, h2, h3, .logo { font-family: 'Space Grotesk', sans-serif; }
   text-decoration: none;
   opacity: 0.8;
 }
+/* --- MOBILE ADAPTIVE (Исправления для Hero) --- */
+@media (max-width: 992px) {
+  /* Скрываем десктопную навигацию и показываем бургер */
+  .nav { display: none; }
+  .burger { display: flex; }
+  .hide-mobile { display: none; }
+
+  /* 1. Уменьшаем отступы секции Hero, чтобы она влезала в экран */
+  .hero {
+      padding: 120px 0 80px; /* Было 180px 0 120px */
+      min-height: auto; /* Убираем принудительную высоту 100vh на мобилках */
+  }
+
+  /* Перестраиваем сетку в одну колонку */
+  .hero__container {
+      grid-template-columns: 1fr;
+      text-align: center;
+      gap: 40px; /* Уменьшаем отступ между текстом и визуалом */
+  }
+
+  /* Центрируем описание и кнопки */
+  .hero__description { margin: 0 auto 40px; }
+  .hero__btns { justify-content: center; }
+
+  /* 2. ИСПРАВЛЕНИЕ ВИЗУАЛА: Делаем его меньше и адаптивным */
+  .hero__visual {
+      display: flex;
+      justify-content: center;
+      /* Добавляем отступ сверху, чтобы не прилипал к кнопкам */
+      margin-top: 20px;
+      /* Важно: предотвращаем выход за пределы контейнера */
+      max-width: 100%;
+      overflow: hidden;
+  }
+
+  .quantum-box {
+      /* Было фиксировано 400px. Меняем на адаптивный размер */
+      width: 100%;
+      max-width: 320px; /* Ограничиваем максимальную ширину */
+      height: 320px; /* Высота должна соответствовать ширине для круга */
+  }
+
+  /* Масштабируем внутренние кольца, чтобы они влезли в новый уменьшенный бокс */
+  .quantum-rings span:nth-child(1) { width: 80%; height: 80%; }
+  .quantum-rings span:nth-child(2) { width: 65%; height: 65%; }
+  .quantum-rings span:nth-child(3) { width: 50%; height: 50%; }
+
+  /* Центрируем ядро */
+  .quantum-circle {
+      width: 60px;
+      height: 60px;
+  }
+
+  /* Адаптация других секций (оставляем как было) */
+  .about__grid,
+  .features__container,
+  .innovations__grid,
+  .contact__container,
+  .footer__grid {
+      grid-template-columns: 1fr;
+      gap: 50px;
+  }
+
+  .features__sticky { position: static; text-align: center; }
+  .contact__form-wrapper { padding: 30px; }
+  .innovations__visual { display: none; }
+  .roadmap { padding-left: 30px; }
+  .roadmap__marker { left: -40px; width: 32px; height: 32px; font-size: 0.8rem; }
+}
+
+/* Дополнительный брейкпоинт для совсем узких экранов (например, iPhone SE) */
+@media (max-width: 380px) {
+  .hero__title {
+      font-size: 2.5rem; /* Немного уменьшаем заголовок */
+  }
+  .quantum-box {
+      max-width: 280px; /* Ещё немного уменьшаем визуал */
+      height: 280px;
+  }
+}
